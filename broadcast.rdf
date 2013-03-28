@@ -26,6 +26,13 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
     <owl:Ontology rdf:about="http://graingert.co.uk/broadcast-ontology/">
+        <foaf:maker>
+            <foaf:Person rdf:about="http://graingert.co.uk/foaf.rdf#me">
+                <foaf:name>Thomas Grainger</foaf:name>
+                <foaf:mbox>tag1g09@ecs.soton.ac.uk</foaf:mbox>
+                <foaf:mbox>tagrain@gmail.co.uk</foaf:mbox>
+            </foaf:Person>
+        </foaf:maker>
         <rdfs:comment xml:lang="en">A vocabulary for broadcastable programme data.
 It defines concepts such as Series, Episodes and Broadcasts. Also defined are Agents such as Director, Actor and Presenter.</rdfs:comment>
         <owl:imports rdf:resource="http://purl.org/NET/c4dm/event.owl"/>

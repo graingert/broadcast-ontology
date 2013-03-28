@@ -4,22 +4,31 @@
 <!DOCTYPE rdf:RDF [
     <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
     <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY event "http://purl.org/NET/c4dm/event.owl#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
-    <!ENTITY bo "http://graingert.co.uk/broadcast-ontology/" >
+    <!ENTITY tl "http://purl.org/NET/c4dm/timeline.owl#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
 ]>
 
 
 <rdf:RDF xmlns="http://graingert.co.uk/broadcast-ontology/"
      xml:base="http://graingert.co.uk/broadcast-ontology/"
-     xmlns:bo="http://graingert.co.uk/broadcast-ontology/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:tl="http://purl.org/NET/c4dm/timeline.owl#"
      xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:event="http://purl.org/NET/c4dm/event.owl#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
     <owl:Ontology rdf:about="http://graingert.co.uk/broadcast-ontology/">
+        <rdfs:comment xml:lang="en">A vocabulary for broadcastable programme data.
+It defines concepts such as Series, Episodes and Broadcasts. Also defined are Agents such as Director, Actor and Presenter.</rdfs:comment>
+        <owl:imports rdf:resource="http://purl.org/NET/c4dm/event.owl"/>
+        <owl:imports rdf:resource="http://purl.org/NET/c4dm/timeline.owl"/>
+        <owl:imports rdf:resource="http://purl.org/dc/elements/1.1/"/>
         <owl:imports rdf:resource="http://xmlns.com/foaf/0.1/"/>
     </owl:Ontology>
     
@@ -38,7 +47,7 @@
 
     <!-- http://graingert.co.uk/broadcast-ontology/Actor -->
 
-    <owl:Class rdf:about="&bo;Actor">
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Actor">
         <rdfs:subClassOf rdf:resource="&foaf;Person"/>
     </owl:Class>
     
@@ -46,27 +55,29 @@
 
     <!-- http://graingert.co.uk/broadcast-ontology/Broadcast -->
 
-    <owl:Class rdf:about="&bo;Broadcast"/>
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Broadcast">
+        <rdfs:subClassOf rdf:resource="&event;Event"/>
+    </owl:Class>
     
 
 
     <!-- http://graingert.co.uk/broadcast-ontology/Broadcaster -->
 
-    <owl:Class rdf:about="&bo;Broadcaster">
-        <rdfs:subClassOf rdf:resource="&foaf;Person"/>
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Broadcaster">
+        <rdfs:subClassOf rdf:resource="&foaf;Organization"/>
     </owl:Class>
     
 
 
     <!-- http://graingert.co.uk/broadcast-ontology/Channel -->
 
-    <owl:Class rdf:about="&bo;Channel"/>
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Channel"/>
     
 
 
     <!-- http://graingert.co.uk/broadcast-ontology/Director -->
 
-    <owl:Class rdf:about="&bo;Director">
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Director">
         <rdfs:subClassOf rdf:resource="&foaf;Person"/>
     </owl:Class>
     
@@ -74,19 +85,19 @@
 
     <!-- http://graingert.co.uk/broadcast-ontology/Episode -->
 
-    <owl:Class rdf:about="&bo;Episode"/>
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Episode"/>
     
 
 
     <!-- http://graingert.co.uk/broadcast-ontology/Format -->
 
-    <owl:Class rdf:about="&bo;Format"/>
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Format"/>
     
 
 
     <!-- http://graingert.co.uk/broadcast-ontology/Presenter -->
 
-    <owl:Class rdf:about="&bo;Presenter">
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Presenter">
         <rdfs:subClassOf rdf:resource="&foaf;Person"/>
     </owl:Class>
     
@@ -94,7 +105,7 @@
 
     <!-- http://graingert.co.uk/broadcast-ontology/Producer -->
 
-    <owl:Class rdf:about="&bo;Producer">
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Producer">
         <rdfs:subClassOf rdf:resource="&foaf;Person"/>
     </owl:Class>
     
@@ -102,7 +113,7 @@
 
     <!-- http://graingert.co.uk/broadcast-ontology/Production_Company -->
 
-    <owl:Class rdf:about="&bo;Production_Company">
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Production_Company">
         <rdfs:subClassOf rdf:resource="&foaf;Organization"/>
     </owl:Class>
     
@@ -110,13 +121,13 @@
 
     <!-- http://graingert.co.uk/broadcast-ontology/Programme -->
 
-    <owl:Class rdf:about="&bo;Programme"/>
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Programme"/>
     
 
 
     <!-- http://graingert.co.uk/broadcast-ontology/Series -->
 
-    <owl:Class rdf:about="&bo;Series"/>
+    <owl:Class rdf:about="http://graingert.co.uk/broadcast-ontology/Series"/>
 </rdf:RDF>
 
 

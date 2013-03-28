@@ -1,0 +1,9 @@
+PREFIX bo: <http://graingert.co.uk/broadcast-ontology/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+SELECT ?channel WHERE { 
+    ?twau a bo:Programme ;
+        dc:title "The World Around Us"@en ;
+        bo:version ?version .
+    ?version bo:broadcast ?broadcast  .
+                  ?broadcast bo:broadcast_on ?channel .
+}

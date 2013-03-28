@@ -39,6 +39,56 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://graingert.co.uk/broadcast-ontology/broadcast -->
+
+    <owl:ObjectProperty rdf:about="&bo;broadcast">
+        <rdfs:range rdf:resource="&bo;Broadcast"/>
+        <rdfs:domain rdf:resource="&bo;Version"/>
+        <owl:inverseOf rdf:resource="&bo;broadcast_of"/>
+        <rdfs:subPropertyOf rdf:resource="&event;factor_of"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://graingert.co.uk/broadcast-ontology/broadcast_of -->
+
+    <owl:ObjectProperty rdf:about="&bo;broadcast_of">
+        <rdfs:subPropertyOf rdf:resource="&event;factor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://graingert.co.uk/broadcast-ontology/broadcast_on -->
+
+    <owl:ObjectProperty rdf:about="&bo;broadcast_on">
+        <rdfs:comment xml:lang="en">Relates a particular broadcast to a particular channel. A Broadcast can be simulcast on multiple Channels.</rdfs:comment>
+        <rdfs:range rdf:resource="&bo;Broadcast"/>
+        <rdfs:domain rdf:resource="&bo;Version"/>
+        <rdfs:subPropertyOf rdf:resource="&event;factor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://graingert.co.uk/broadcast-ontology/version -->
+
+    <owl:ObjectProperty rdf:about="&bo;version">
+        <rdfs:domain rdf:resource="&bo;Programme"/>
+        <rdfs:range rdf:resource="&bo;Version"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Classes
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -130,6 +180,42 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
     <!-- http://graingert.co.uk/broadcast-ontology/Series -->
 
     <owl:Class rdf:about="&bo;Series"/>
+    
+
+
+    <!-- http://graingert.co.uk/broadcast-ontology/Version -->
+
+    <owl:Class rdf:about="&bo;Version"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://graingert.co.uk/broadcast-ontology/World_Around_Us -->
+
+    <Programme rdf:about="&bo;World_Around_Us">
+        <dc:title xml:lang="en">The World Around Us</dc:title>
+        <version>
+            <Version>
+                <broadcast>
+                    <Broadcast>
+                        <broadcast_on>
+                            <Channel rdf:about="http://www.bbc.co.uk/bbcone" />
+                        </broadcast_on>
+                    </Broadcast>
+                </broadcast>
+            </Version>
+        </version>
+    </Programme>
 </rdf:RDF>
 
 

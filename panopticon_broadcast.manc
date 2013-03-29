@@ -1,0 +1,27 @@
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+Prefix: foaf: <http://xmlns.com/foaf/0.1/>
+Prefix: : <http://graingert.co.uk/broadcast-ontology/>
+
+Import: <http://www.w3.org/2000/01/rdf-schema#>
+Import: <http://xmlns.com/foaf/0.1/>
+
+Class: Broadcast
+Class: Version
+Class: Episode
+Class: Production_Company
+Class: Episode
+
+Individual: Panopticon_Productions
+
+ObjectProperty: isVersionOf
+ObjectProperty: isBroadcastOf
+ObjectProperty: foaf:maker
+ObjectProperty: rdfs:label
+
+Class: PanopticonBroadcast
+    SubClassOf: Broadcast,
+        isBroadcastOf some (
+            Version that isVersionOf some (
+                Episode that foaf:maker value Panopticon_Productions
+            )
+        )

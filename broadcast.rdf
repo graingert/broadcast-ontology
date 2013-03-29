@@ -11,6 +11,7 @@
     <!ENTITY tl "http://purl.org/NET/c4dm/timeline.owl#" >
     <!ENTITY bo "http://graingert.co.uk/broadcast-ontology/" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY part "http://purl.org/vocab/participation/schema#" >
 ]>
 
 
@@ -24,7 +25,8 @@
      xmlns:event="http://purl.org/NET/c4dm/event.owl#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:part="http://purl.org/vocab/participation/schema#">
     <owl:Ontology rdf:about="http://graingert.co.uk/broadcast-ontology/">
         <foaf:maker>
             <foaf:Person rdf:about="http://graingert.co.uk/foaf.rdf#me">
@@ -39,6 +41,7 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
         <owl:imports rdf:resource="http://purl.org/NET/c4dm/timeline.owl"/>
         <owl:imports rdf:resource="http://purl.org/dc/elements/1.1/"/>
         <owl:imports rdf:resource="http://xmlns.com/foaf/0.1/"/>
+        <owl:imports rdf:resource="http://purl.org/vocab/participation/schema#"/>
     </owl:Ontology>
     
 
@@ -122,13 +125,6 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
      -->
 
     
-
-
-    <!-- http://graingert.co.uk/broadcast-ontology/Actor -->
-
-    <owl:Class rdf:about="&bo;Actor">
-        <rdfs:subClassOf rdf:resource="&foaf;Person"/>
-    </owl:Class>
     
 
 
@@ -137,7 +133,7 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
     <owl:Class rdf:about="&bo;Broadcast">
         <rdfs:subClassOf rdf:resource="&event;Event"/>
     </owl:Class>
-    
+    <owl:Class rdf:about="&bo;Channel"/>
 
 
     <!-- http://graingert.co.uk/broadcast-ontology/Broadcaster -->
@@ -145,76 +141,86 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
     <owl:Class rdf:about="&bo;Broadcaster">
         <rdfs:subClassOf rdf:resource="&foaf;Organization"/>
     </owl:Class>
-    
-
-
-    <!-- http://graingert.co.uk/broadcast-ontology/Channel -->
-
-    <owl:Class rdf:about="&bo;Channel"/>
-    
-
-
-    <!-- http://graingert.co.uk/broadcast-ontology/Director -->
-
-    <owl:Class rdf:about="&bo;Director">
-        <rdfs:subClassOf rdf:resource="&foaf;Person"/>
-    </owl:Class>
-    
-
-
-    <!-- http://graingert.co.uk/broadcast-ontology/Episode -->
-
-    <owl:Class rdf:about="&bo;Episode"/>
-    
-
-
-    <!-- http://graingert.co.uk/broadcast-ontology/Format -->
-
-    <owl:Class rdf:about="&bo;Format"/>
-    <owl:Class rdf:about="&bo;Genre"/>
-    
-
-
-    <!-- http://graingert.co.uk/broadcast-ontology/Presenter -->
-
-    <owl:Class rdf:about="&bo;Presenter">
-        <rdfs:subClassOf rdf:resource="&foaf;Person"/>
-    </owl:Class>
-    
-
-
-    <!-- http://graingert.co.uk/broadcast-ontology/Producer -->
 
     <owl:Class rdf:about="&bo;Producer">
-        <rdfs:subClassOf rdf:resource="&foaf;Person"/>
+        <rdfs:subClassOf rdf:resource="&part;Role"/>
     </owl:Class>
-    
-
-
-    <!-- http://graingert.co.uk/broadcast-ontology/Production_Company -->
 
     <owl:Class rdf:about="&bo;Production_Company">
         <rdfs:subClassOf rdf:resource="&foaf;Organization"/>
     </owl:Class>
-    
-
 
     <!-- http://graingert.co.uk/broadcast-ontology/Programme -->
 
     <owl:Class rdf:about="&bo;Programme"/>
-    
-
-
-    <!-- http://graingert.co.uk/broadcast-ontology/Series -->
-
     <owl:Class rdf:about="&bo;Series"/>
-    
-
-
-    <!-- http://graingert.co.uk/broadcast-ontology/Version -->
+    <owl:Class rdf:about="&bo;Episode"/>
+    <owl:Class rdf:about="&bo;Format"/>
+    <owl:Class rdf:about="&bo;Genre"/>
 
     <owl:Class rdf:about="&bo;Version"/>
-    
+
+    <owl:Class rdf:about="&bo;Cast"/>
+
+    <owl:ObjectProperty rdf:about="&bo;hasCast">
+        <rdfs:domain rdf:resource="&bo;Programme"/>
+        <rdfs:domain rdf:resource="&bo;Cast"/>
+        <rdfs:subPropertyOf rdf:resource="&foaf;maker"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&bo;isCastOf">
+        <rdfs:inverseOf rdf:resource="&bo;hasCast"/>
+        <rdfs:subPropertyOf rdf:resource="&foaf;made"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&bo;hasActor">
+        <rdfs:domain rdf:resource="&bo;Cast"/>
+        <rdfs:range rdf:resource="&bo;Actor"/>
+        <rdfs:subPropertyOf rdf:resource="&part;role"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&bo;actsAt">
+        <owl:inverseOf rdf:resource="&bo;hasActor"/>
+        <rdfs:subPropertyOf rdf:resource="&part;role_at"/>
+    </owl:ObjectProperty>
+
+    <owl:Class rdf:about="&bo;Actor">
+        <rdfs:subClassOf rdf:resource="&part;Role"/>
+    </owl:Class>
+
+    <owl:ObjectProperty rdf:about="&bo;hasPresenter">
+        <rdfs:domain rdf:resource="&bo;Cast"/>
+        <rdfs:range rdf:resource="&bo;Presenter"/>
+        <rdfs:subPropertyOf rdf:resource="&part;role"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&bo;presentsAt">
+        <owl:inverseOf rdf:resource="&bo;hasPresenter"/>
+        <rdfs:subPropertyOf rdf:resource="&part;role_at"/>
+    </owl:ObjectProperty>
+
+    <owl:Class rdf:about="&bo;Presenter">
+        <rdfs:subClassOf rdf:resource="&part;Role"/>
+    </owl:Class>
+
+    <owl:ObjectProperty rdf:about="&bo;hasDirector">
+        <rdfs:domain rdf:resource="&bo;Cast"/>
+        <rdfs:range rdf:resource="&bo;Presenter"/>
+        <rdfs:subPropertyOf rdf:resource="&part;role"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&bo;directsAt">
+        <owl:inverseOf rdf:resource="&bo;hasPresenter"/>
+        <rdfs:subPropertyOf rdf:resource="&part;role_at"/>
+    </owl:ObjectProperty>
+
+    <owl:Class rdf:about="&bo;Director">
+        <rdfs:subClassOf rdf:resource="&part;Role"/>
+    </owl:Class>
+
+
+
+
 
 
     <!-- 
@@ -286,15 +292,28 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
                                 <rdfs:label xml:lang="en">Pre-School</rdfs:label>
                             </Genre>
                         </hasGenre>
+                        <hasCast>
+                            <Cast>
+                                <hasActor>
+                                    <Actor>
+                                        <part:holder>
+                                            <foaf:Person>
+                                                <foaf:name>Dirk Cleftjaw</foaf:name>
+                                            </foaf:Person>
+                                        </part:holder>
+                                    </Actor>
+                                </hasActor>
+                            </Cast>
+                        </hasCast>
                     </Programme>
                 </isVersionOf>
             </Version>
         </isBroadcastOf>
         <event:time>
             <tl:UTInterval>
-                <tl:duration rdf:datatype="&xsd;duration">PTH1M30<tl:duration>
+                <tl:duration rdf:datatype="&xsd;duration">PTH1M30</tl:duration>
             </tl:UTInterval>
-        <event:time>
+        </event:time>
         <isBroadcastOn>
             <Channel>
                 <rdfs:label xml:lang="en">CBTV</rdfs:label>
@@ -303,7 +322,7 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
                         <rdfs:label xml:lang="en">BTV</rdfs:label>
                     </Broadcaster>
                 </isOperatedBy>
-            <Channel>
+            </Channel>
         </isBroadcastOn>
     </Broadcast>
 </rdf:RDF>

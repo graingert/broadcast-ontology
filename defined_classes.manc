@@ -1,20 +1,27 @@
 Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 Prefix: foaf: <http://xmlns.com/foaf/0.1/>
+Prefix: part: <http://purl.org/vocab/participation/schema#>
 Prefix: : <http://graingert.co.uk/broadcast-ontology/>
 
 Import: <http://www.w3.org/2000/01/rdf-schema#>
 Import: <http://xmlns.com/foaf/0.1/>
+Import: <http://purl.org/vocab/participation/schema#>
 
 Class: Broadcast
 Class: Version
 Class: Episode
 Class: Production_Company
 Class: Episode
+Class: Programme
+Class: Genre
+Class: foaf:Person
 
 Individual: Panopticon_Productions
+Individual: CurrentAffairsProgramme
 
 ObjectProperty: isVersionOf
 ObjectProperty: isBroadcastOf
+ObjectProperty: hasGenre
 ObjectProperty: foaf:maker
 ObjectProperty: rdfs:label
 
@@ -25,3 +32,21 @@ Class: PanopticonBroadcast
                 Episode that foaf:maker value Panopticon_Productions
             )
         )
+
+Class: CurrentAffairs
+    SubClassOf: Programme,
+        hasGenre value CurrentAffairs
+
+Class: HDBroadcast
+    SubClassOf: Broadcast,
+        isBroadcastOn some Channel #With HD capabilities,
+        isBroadcastOf some Version #In HD quality,
+
+Class: RepeatedEpisode
+    SubClassOf: Episode,
+        #Has a broadcast with greater than two cardinality
+        #or (has a version with greater than one broadcast) with greater than one cardinality
+
+Class: ActorDirector
+    SubClassOf: foaf:Person,
+        part:holder_of some Actor and part:holder_of some Director

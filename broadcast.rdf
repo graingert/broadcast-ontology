@@ -170,7 +170,6 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
 
     <owl:ObjectProperty rdf:about="&bo;isCastOf">
         <rdfs:inverseOf rdf:resource="&bo;hasCast"/>
-        <rdfs:subPropertyOf rdf:resource="&foaf;made"/>
     </owl:ObjectProperty>
 
     <owl:ObjectProperty rdf:about="&bo;hasActor">
@@ -181,7 +180,6 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
 
     <owl:ObjectProperty rdf:about="&bo;actsAt">
         <owl:inverseOf rdf:resource="&bo;hasActor"/>
-        <rdfs:subPropertyOf rdf:resource="&part;role_at"/>
     </owl:ObjectProperty>
 
     <owl:Class rdf:about="&bo;Actor">
@@ -196,7 +194,6 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
 
     <owl:ObjectProperty rdf:about="&bo;presentsAt">
         <owl:inverseOf rdf:resource="&bo;hasPresenter"/>
-        <rdfs:subPropertyOf rdf:resource="&part;role_at"/>
     </owl:ObjectProperty>
 
     <owl:Class rdf:about="&bo;Presenter">
@@ -205,13 +202,12 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
 
     <owl:ObjectProperty rdf:about="&bo;hasDirector">
         <rdfs:domain rdf:resource="&bo;Cast"/>
-        <rdfs:range rdf:resource="&bo;Presenter"/>
+        <rdfs:range rdf:resource="&bo;Director"/>
         <rdfs:subPropertyOf rdf:resource="&part;role"/>
     </owl:ObjectProperty>
 
     <owl:ObjectProperty rdf:about="&bo;directsAt">
-        <owl:inverseOf rdf:resource="&bo;hasPresenter"/>
-        <rdfs:subPropertyOf rdf:resource="&part;role_at"/>
+        <owl:inverseOf rdf:resource="&bo;hasDirector"/>
     </owl:ObjectProperty>
 
     <owl:Class rdf:about="&bo;Director">

@@ -56,10 +56,10 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
 
     <!-- http://graingert.co.uk/broadcast-ontology/broadcast -->
 
-    <owl:ObjectProperty rdf:about="&bo;broadcast">
+    <owl:ObjectProperty rdf:about="&bo;hasBroadcast">
         <rdfs:range rdf:resource="&bo;Broadcast"/>
         <rdfs:domain rdf:resource="&bo;Version"/>
-        <owl:inverseOf rdf:resource="&bo;broadcast_of"/>
+        <owl:inverseOf rdf:resource="&bo;isBroadcastOf"/>
         <rdfs:subPropertyOf rdf:resource="&event;factor_of"/>
     </owl:ObjectProperty>
     
@@ -67,7 +67,7 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
 
     <!-- http://graingert.co.uk/broadcast-ontology/broadcast_of -->
 
-    <owl:ObjectProperty rdf:about="&bo;broadcast_of">
+    <owl:ObjectProperty rdf:about="&bo;isBroadcastOf">
         <rdfs:subPropertyOf rdf:resource="&event;factor"/>
     </owl:ObjectProperty>
     
@@ -75,7 +75,7 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
 
     <!-- http://graingert.co.uk/broadcast-ontology/broadcast_on -->
 
-    <owl:ObjectProperty rdf:about="&bo;broadcast_on">
+    <owl:ObjectProperty rdf:about="&bo;isBroadcastOf">
         <rdfs:comment xml:lang="en">Relates a particular broadcast to a particular channel. A Broadcast can be simulcast on multiple Channels.</rdfs:comment>
         <rdfs:range rdf:resource="&bo;Broadcast"/>
         <rdfs:domain rdf:resource="&bo;Version"/>
@@ -86,21 +86,21 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
 
     <!-- http://graingert.co.uk/broadcast-ontology/version -->
 
-    <owl:ObjectProperty rdf:about="&bo;version">
+    <owl:ObjectProperty rdf:about="&bo;hasVersion">
         <rdfs:domain rdf:resource="&bo;Programme"/>
         <rdfs:range rdf:resource="&bo;Version"/>
     </owl:ObjectProperty>
 
-    <owl:ObjectProperty rdf:about="&bo;version_of">
+    <owl:ObjectProperty rdf:about="&bo;isVersionOf">
         <owl:inverseOf rdf:resource="&bo;version"/>
     </owl:ObjectProperty>
 
-    <owl:ObjectProperty rdf:about="&bo;genre">
+    <owl:ObjectProperty rdf:about="&bo;hasGenre">
         <rdfs:domain rdf:resource="&bo;Programme"/>
         <rdfs:range rdf:resource="&bo;Genre"/>
     </owl:ObjectProperty>
 
-    <owl:ObjectProperty rdf:about="&bo;genre_of">
+    <owl:ObjectProperty rdf:about="&bo;isGenreOf">
         <owl:inverseOf rdf:resource="&bo;genre"/>
     </owl:ObjectProperty>
 
@@ -224,23 +224,23 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
 
     <Programme rdf:about="&bo;World_Around_Us">
         <dc:title xml:lang="en">The World Around Us</dc:title>
-        <version>
+        <hasVersion>
             <Version>
-                <broadcast>
+                <hasBroadcast>
                     <Broadcast>
-                        <broadcast_on>
+                        <isBroadcastOn>
                             <Channel rdf:about="http://www.bbc.co.uk/bbcone" />
-                        </broadcast_on>
+                        </isBroadcastOn>
                     </Broadcast>
-                </broadcast>
+                </hasBroadcast>
             </Version>
-        </version>
+        </hasVersion>
     </Programme>
 
     <Broadcast>
-        <broadcast_of>
+        <isBroadcastOf>
             <Version>
-                <version_of>
+                <isVersionOf>
                     <Programme>
                         <genre>
                             <Genre>
@@ -248,14 +248,14 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
                             </Genre>
                         </genre>
                     </Programme>
-                </version_of>
+                </isVersionOf>
             </Version>
-        </broadcast_of>
-        <broadcast_on>
+        </isBroadcastOf>
+        <isBroadcastOn>
             <Channel>
                 <rdfs:label xml:lang="en">Channel 9</rdfs:label>
             </Channel>
-        </broadcast_on>
+        </isBroadcastOn>
         <event:time>
             <tl:Interval>
                 <tl:at rdf:datatype="&xsd;dateTime">2007-10-15T12:00:00</tl:at>

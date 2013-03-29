@@ -77,11 +77,10 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
 
     <owl:ObjectProperty rdf:about="&bo;isBroadcastOn">
         <rdfs:comment xml:lang="en">Relates a particular broadcast to a particular channel. A Broadcast can be simulcast on multiple Channels.</rdfs:comment>
-        <rdfs:range rdf:resource="&bo;Broadcast"/>
-        <rdfs:domain rdf:resource="&bo;Version"/>
+        <rdfs:domain rdf:resource="&bo;Broadcast"/>
+        <rdfs:range rdf:resource="&bo;Channel"/>
         <rdfs:subPropertyOf rdf:resource="&event;factor"/>
     </owl:ObjectProperty>
-    
 
 
     <!-- http://graingert.co.uk/broadcast-ontology/version -->
@@ -101,7 +100,16 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
     </owl:ObjectProperty>
 
     <owl:ObjectProperty rdf:about="&bo;isGenreOf">
-        <owl:inverseOf rdf:resource="&bo;genre"/>
+        <owl:inverseOf rdf:resource="&bo;hasGenre"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&bo;hasFormat">
+        <rdfs:domain rdf:resource="&bo;Programme"/>
+        <rdfs:range rdf:resource="&bo;Format"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&bo;isFormatOf">
+        <owl:inverseOf rdf:resource="&bo;hasFormat"/>
     </owl:ObjectProperty>
 
 

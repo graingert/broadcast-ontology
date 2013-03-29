@@ -257,10 +257,46 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
             </Channel>
         </isBroadcastOn>
         <event:time>
-            <tl:Interval>
-                <tl:at rdf:datatype="&xsd;dateTime">2007-10-15T12:00:00</tl:at>
-            </tl:Interval>
+            <tl:UTInterval>
+                <tl:start rdf:datatype="&xsd;dateTime">2007-10-15T12:00:00</tl:start>
+            </tl:UTInterval>
         </event:time>
+    </Broadcast>
+
+    <Broadcast>
+        <isBroadcastOf>
+            <Version>  
+                <isVersionOf>
+                    <Programme>
+                        <hasFormat>
+                            <Format>
+                                <rdfs:label xml:lang="en">Readings</rdfs:label>
+                            </Format>
+                        </hasFormat>
+                        <hasGenre>
+                            <Genre>
+                                <rdfs:label xml:lang="en">Pre-School</rdfs:label>
+                            </Genre>
+                        </hasGenre>
+                    </Programme>
+                </isVersionOf>
+            </Version>
+        </isBroadcastOf>
+        <event:time>
+            <tl:UTInterval>
+                <tl:duration rdf:datatype="&xsd;duration">PTH1M30<tl:duration>
+            </tl:UTInterval>
+        <event:time>
+        <isBroadcastOn>
+            <Channel>
+                <rdfs:label xml:lang="en">CBTV</rdfs:label>
+                <isOperatedBy>
+                    <Broadcaster>
+                        <rdfs:label xml:lang="en">BTV</rdfs:label>
+                    </Broadcaster>
+                </isOperatedBy>
+            <Channel>
+        </isBroadcastOn>
     </Broadcast>
 </rdf:RDF>
 

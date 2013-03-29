@@ -94,7 +94,7 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
     </owl:ObjectProperty>
 
     <owl:ObjectProperty rdf:about="&bo;isVersionOf">
-        <owl:inverseOf rdf:resource="&bo;version"/>
+        <owl:inverseOf rdf:resource="&bo;hasVersion"/>
     </owl:ObjectProperty>
 
     <owl:ObjectProperty rdf:about="&bo;hasGenre">
@@ -164,7 +164,7 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
 
     <owl:ObjectProperty rdf:about="&bo;hasCast">
         <rdfs:domain rdf:resource="&bo;Programme"/>
-        <rdfs:domain rdf:resource="&bo;Cast"/>
+        <rdfs:range rdf:resource="&bo;Cast"/>
         <rdfs:subPropertyOf rdf:resource="&foaf;maker"/>
     </owl:ObjectProperty>
 

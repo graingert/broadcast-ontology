@@ -97,6 +97,7 @@ Class: Broadcast
 
 ObjectProperty: isBroadcastOf
 ObjectProperty: hasBroadcast
+    Characteristics: InverseFunctional
     SubPropertyOf: event:factor_of
     Range: Broadcast
     Domain: Programme
@@ -157,6 +158,13 @@ Class: PanopticonBroadcast
         isBroadcastOf some (
             Episode that foaf:maker value Panopticon_Productions
         )
+
+Individual: testPanopticonBroadcast
+    Types: Broadcast
+    Facts: isBroadcastOf _:testEpisode
+
+Individual: _:testEpisode
+    Facts: hasProductionCompany Panopticon_Productions
 
 Class: CurrentAffairs
     SubClassOf: Programme,

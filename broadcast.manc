@@ -103,7 +103,7 @@ ObjectProperty: hasBroadcast
     InverseOf: isBroadcastOf
 
 
-ObjectProperty: broadcastOn
+ObjectProperty: isBroadcastOn
     SubPropertyOf: event:factor
     Domain: Broadcast
     Range: Channel
@@ -145,3 +145,34 @@ ObjectProperty: hasDirector
     InverseOf: directsAt
     Domain: Cast
     Range: Director
+
+
+Individual: Panopticon_Productions
+Individual: CurrentAffairsGenre
+ObjectProperty: part:holder_of
+Class: foaf:Person
+
+Class: PanopticonBroadcast
+    SubClassOf: Broadcast,
+        isBroadcastOf some (
+            Episode that foaf:maker value Panopticon_Productions
+        )
+
+Class: CurrentAffairs
+    SubClassOf: Programme,
+        hasGenre value CurrentAffairsGenre
+
+Class: HDChannel
+    SubClassOf: Channel
+
+Class: HDBroadcast
+    SubClassOf: Broadcast,
+        isBroadcastOn some HDChannel
+
+Class: RepeatedEpisode
+    SubClassOf: Episode,
+        hasBroadcast min 2 Broadcast
+
+Class: ActorDirector
+    SubClassOf: foaf:Person,
+        part:holder_of some Actor and part:holder_of some Director

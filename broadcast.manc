@@ -16,11 +16,9 @@ Ontology: <http://purl.org/broadcasts/programmes#>
 Import: <http://xmlns.com/foaf/0.1/>
 Import: <http://purl.org/dc/elements/1.1/>
 Import: <http://purl.org/vocab/participation/schema#>
-Import: <http://purl.org/NET/c4dm/event.owl>
-Import: <http://purl.org/NET/c4dm/timeline.owl>
+Import: <http://purl.org/NET/c4dm/event.owl#>
+Import: <http://purl.org/NET/c4dm/timeline.owl#>
 
-
-Class: Broadcast
 Class: Channel
 Class: Production_Company
 Class: Programme
@@ -78,3 +76,72 @@ ObjectProperty: hasFormat
     InverseOf: isFormatOf
     Domain: Format
     Range: Genre
+
+ObjectProperty: foaf:maker
+ObjectProperty: foaf:made
+Class: ProductionCompany
+
+ObjectProperty: hasProductionCompany
+ObjectProperty: isProductionCompanyOf
+    SubPropertyOf: foaf:made
+    Range: Programme
+    Domain: ProductionCompany
+    InverseOf: hasProductionCompany
+
+Class: event:Event
+ObjectProperty: event:factor
+ObjectProperty: event:factor_of
+
+Class: Broadcast
+    SubClassOf: event:Event
+
+ObjectProperty: isBroadcastOf
+ObjectProperty: hasBroadcast
+    SubPropertyOf: event:factor_of
+    Range: Broadcast
+    Domain: Programme
+    InverseOf: isBroadcastOf
+
+
+ObjectProperty: broadcastOn
+    SubPropertyOf: event:factor
+    Domain: Broadcast
+    Range: Channel
+
+Class: Cast
+
+ObjectProperty: isCastOf
+ObjectProperty: hasCast
+    SubPropertyOf: foaf:maker
+    Domain: Programme
+    Range: Cast
+
+Class: part:Role
+Class: Producer
+    SubClassOf: part:Role
+Class: Actor
+    SubClassOf: part:Role
+Class: Director
+    SubClassOf: part:Role
+
+ObjectProperty: part:role
+ObjectProperty: producesAt
+ObjectProperty: hasProducer
+    SubPropertyOf: part:role
+    InverseOf: producesAt
+    Domain: Cast
+    Range: Producer
+
+ObjectProperty: actsAt
+ObjectProperty: hasActor
+    SubPropertyOf: part:role
+    InverseOf: actsAt
+    Domain: Cast
+    Range: Actor
+
+ObjectProperty: directsAt
+ObjectProperty: hasDirector
+    SubPropertyOf: part:role
+    InverseOf: directsAt
+    Domain: Cast
+    Range: Director

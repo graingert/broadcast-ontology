@@ -19,6 +19,8 @@ Import: <http://purl.org/vocab/participation/schema#>
 Import: <http://purl.org/NET/c4dm/event.owl#>
 Import: <http://purl.org/NET/c4dm/timeline.owl#>
 
+AnnotationProperty: dc:comment
+
 Class: Channel
 Class: Programme
 
@@ -38,6 +40,7 @@ DataProperty: hasPosition
     Range: position
 
 Class: Episode
+    Annotations: dc:comment "An episode is a Programme, that has a hasPosition in some Series. A key is defined such that any Episode with the same position and Series is the same Episode"
     SubClassOf: Programme
     HasKey: hasPosition, isEpisodeOf
 
@@ -183,7 +186,8 @@ Class: HDChannel
 Class: HDBroadcast
     EquivalentTo: Broadcast and isBroadcastOn some HDChannel
 
-Individual: testHDBroadcast
+Individual: theWorldAroundUs
+    Annotations: dc:comment "This is an example of an HDBroadcast"
     Types: Broadcast
     Facts: isBroadcastOn _:testChannel
 

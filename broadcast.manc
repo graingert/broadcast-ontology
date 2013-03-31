@@ -203,6 +203,10 @@ Class: HDBroadcast
     EquivalentTo: Broadcast and isBroadcastOn some HDChannel
 
 Individual: theWorldAroundUs
+    Types: Episode
+    Facts: hasBroadcast theWorldAroundUsBroadcast
+
+Individual: theWorldAroundUsBroadcast
     Annotations: dc:comment "This is an example of an HDBroadcast"
     Types: Broadcast
     Facts: isBroadcastOn _:testChannel

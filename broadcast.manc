@@ -99,6 +99,9 @@ ObjectProperty: event:factor_of
 
 Class: Broadcast
     SubClassOf: event:Event
+Class: foaf:Organization
+Class: Broadcaster
+    SubClassOf: foaf:Organization
 
 ObjectProperty: isBroadcastOf
 ObjectProperty: hasBroadcast
@@ -113,6 +116,12 @@ ObjectProperty: isBroadcastOn
     SubPropertyOf: event:factor
     Domain: Broadcast
     Range: Channel
+
+ObjectProperty: isBroadcasterOf
+ObjectProperty: hasBroadcaster
+    Domain: Channel
+    Range: Broadcaster
+    InverseOf: isBroadcasterOf
 
 Class: Cast
 

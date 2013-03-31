@@ -9,16 +9,14 @@
     <!ENTITY event "http://purl.org/NET/c4dm/event.owl#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY tl "http://purl.org/NET/c4dm/timeline.owl#" >
-    <!ENTITY bo "http://graingert.co.uk/broadcast-ontology/" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
     <!ENTITY part "http://purl.org/vocab/participation/schema#" >
 ]>
 
 
-<rdf:RDF xmlns="http://graingert.co.uk/broadcast-ontology/"
-     xml:base="http://graingert.co.uk/broadcast-ontology/"
+<rdf:RDF xmlns="http://purl.org/broadcasts/programmes#"
+     xml:base="http://purl.org/broadcasts/programmes#"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:bo="http://graingert.co.uk/broadcast-ontology/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:tl="http://purl.org/NET/c4dm/timeline.owl#"
      xmlns:foaf="http://xmlns.com/foaf/0.1/"
@@ -27,22 +25,50 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:part="http://purl.org/vocab/participation/schema#">
-    <owl:Ontology rdf:about="http://graingert.co.uk/broadcast-ontology/">
+    <owl:Ontology rdf:about="http://purl.org/broadcasts/programmes#">
         <foaf:maker>
             <foaf:Person rdf:about="http://graingert.co.uk/foaf.rdf#me">
                 <foaf:name>Thomas Grainger</foaf:name>
-                <foaf:mbox>tag1g09@ecs.soton.ac.uk</foaf:mbox>
-                <foaf:mbox>tagrain@gmail.co.uk</foaf:mbox>
+                <foaf:mbox rdf:resource="mailto:tag1g09@ecs.soton.ac.uk" />
+                <foaf:mbox rdf:resource="mailto:tagrain@gmail.co.uk" />
             </foaf:Person>
         </foaf:maker>
         <rdfs:comment xml:lang="en">A vocabulary for broadcastable programme data.
-It defines concepts such as Series, Episodes and Broadcasts. Also defined are Agents such as Director, Actor and Presenter.</rdfs:comment>
+It defines concepts such as Series, Episodes and Broadcasts.</rdfs:comment>
         <owl:imports rdf:resource="http://purl.org/NET/c4dm/event.owl"/>
         <owl:imports rdf:resource="http://purl.org/NET/c4dm/timeline.owl"/>
         <owl:imports rdf:resource="http://purl.org/dc/elements/1.1/"/>
         <owl:imports rdf:resource="http://xmlns.com/foaf/0.1/"/>
         <owl:imports rdf:resource="http://purl.org/vocab/participation/schema#"/>
     </owl:Ontology>
+    <owl:Ontology rdf:about="http://purl.org/broadcasts/programmes#"/>
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#position -->
+
+    <rdfs:Datatype rdf:about="http://purl.org/broadcasts/programmes#position">
+        <owl:equivalentClass>
+            <rdfs:Datatype>
+                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                <owl:withRestrictions rdf:parseType="Collection">
+                    <rdf:Description>
+                        <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</xsd:minInclusive>
+                    </rdf:Description>
+                </owl:withRestrictions>
+            </rdfs:Datatype>
+        </owl:equivalentClass>
+    </rdfs:Datatype>
     
 
 
@@ -57,63 +83,257 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
     
 
 
-    <!-- http://graingert.co.uk/broadcast-ontology/broadcast -->
+    <!-- http://purl.org/NET/c4dm/event.owl#factor -->
 
-    <owl:ObjectProperty rdf:about="&bo;hasBroadcast">
-        <rdfs:range rdf:resource="&bo;Broadcast"/>
-        <rdfs:domain rdf:resource="&bo;Version"/>
-        <owl:inverseOf rdf:resource="&bo;isBroadcastOf"/>
-        <rdfs:subPropertyOf rdf:resource="&event;factor_of"/>
+    <owl:ObjectProperty rdf:about="http://purl.org/NET/c4dm/event.owl#factor"/>
+    
+
+
+    <!-- http://purl.org/NET/c4dm/event.owl#factor_of -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/NET/c4dm/event.owl#factor_of"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#actsAt -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#actsAt"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#directsAt -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#directsAt"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#hasActor -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasActor">
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Actor"/>
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Cast"/>
+        <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#actsAt"/>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/vocab/participation/schema#role"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://graingert.co.uk/broadcast-ontology/broadcast_of -->
+    <!-- http://purl.org/broadcasts/programmes#hasBroadcast -->
 
-    <owl:ObjectProperty rdf:about="&bo;isBroadcastOf">
-        <rdfs:subPropertyOf rdf:resource="&event;factor"/>
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasBroadcast">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/NET/c4dm/event.owl#factor_of"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Broadcast"/>
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
+        <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#isBroadcastOf"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://graingert.co.uk/broadcast-ontology/broadcast_on -->
+    <!-- http://purl.org/broadcasts/programmes#hasBroadcaster -->
 
-    <owl:ObjectProperty rdf:about="&bo;isBroadcastOn">
-        <rdfs:comment xml:lang="en">Relates a particular broadcast to a particular channel. A Broadcast can be simulcast on multiple Channels.</rdfs:comment>
-        <rdfs:domain rdf:resource="&bo;Broadcast"/>
-        <rdfs:range rdf:resource="&bo;Channel"/>
-        <rdfs:subPropertyOf rdf:resource="&event;factor"/>
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasBroadcaster">
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Broadcaster"/>
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Channel"/>
+        <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#isBroadcasterOf"/>
     </owl:ObjectProperty>
+    
 
 
-    <!-- http://graingert.co.uk/broadcast-ontology/version -->
+    <!-- http://purl.org/broadcasts/programmes#hasCast -->
 
-    <owl:ObjectProperty rdf:about="&bo;hasVersion">
-        <rdfs:domain rdf:resource="&bo;Programme"/>
-        <rdfs:range rdf:resource="&bo;Version"/>
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasCast">
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Cast"/>
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
+        <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/maker"/>
     </owl:ObjectProperty>
+    
 
-    <owl:ObjectProperty rdf:about="&bo;isVersionOf">
-        <owl:inverseOf rdf:resource="&bo;hasVersion"/>
-    </owl:ObjectProperty>
 
-    <owl:ObjectProperty rdf:about="&bo;hasGenre">
-        <rdfs:domain rdf:resource="&bo;Programme"/>
-        <rdfs:range rdf:resource="&bo;Genre"/>
-    </owl:ObjectProperty>
+    <!-- http://purl.org/broadcasts/programmes#hasDirector -->
 
-    <owl:ObjectProperty rdf:about="&bo;isGenreOf">
-        <owl:inverseOf rdf:resource="&bo;hasGenre"/>
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasDirector">
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Cast"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Director"/>
+        <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#directsAt"/>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/vocab/participation/schema#role"/>
     </owl:ObjectProperty>
+    
 
-    <owl:ObjectProperty rdf:about="&bo;hasFormat">
-        <rdfs:domain rdf:resource="&bo;Programme"/>
-        <rdfs:range rdf:resource="&bo;Format"/>
-    </owl:ObjectProperty>
 
-    <owl:ObjectProperty rdf:about="&bo;isFormatOf">
-        <owl:inverseOf rdf:resource="&bo;hasFormat"/>
+    <!-- http://purl.org/broadcasts/programmes#hasEpisode -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasEpisode"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#hasFormat -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasFormat">
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Format"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Genre"/>
+        <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#isFormatOf"/>
     </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#hasGenre -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasGenre">
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Genre"/>
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
+        <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#isGenreOf"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#hasProducer -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasProducer">
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Cast"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Producer"/>
+        <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#producesAt"/>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/vocab/participation/schema#role"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#hasProductionCompany -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasProductionCompany">
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#ProductionCompany"/>
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
+        <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/maker"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#isBroadcastOf -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isBroadcastOf"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#isBroadcastOn -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isBroadcastOn">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/NET/c4dm/event.owl#factor"/>
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Broadcast"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Channel"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#isBroadcasterOf -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isBroadcasterOf"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#isCastOf -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isCastOf"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#isEpisodeOf -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isEpisodeOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Episode"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Series"/>
+        <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#hasEpisode"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#isFormatOf -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isFormatOf"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#isGenreOf -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isGenreOf"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#isProductionCompanyOf -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isProductionCompanyOf">
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#ProductionCompany"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
+        <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#hasProductionCompany"/>
+        <rdfs:subPropertyOf rdf:resource="http://xmlns.com/foaf/0.1/made"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#producesAt -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#producesAt"/>
+    
+
+
+    <!-- http://purl.org/vocab/participation/schema#holder -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/vocab/participation/schema#holder"/>
+    
+
+
+    <!-- http://purl.org/vocab/participation/schema#holder_of -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/vocab/participation/schema#holder_of">
+        <owl:inverseOf rdf:resource="http://purl.org/vocab/participation/schema#holder"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/vocab/participation/schema#role -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/vocab/participation/schema#role"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/made -->
+
+    <owl:ObjectProperty rdf:about="http://xmlns.com/foaf/0.1/made"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/maker -->
+
+    <owl:ObjectProperty rdf:about="http://xmlns.com/foaf/0.1/maker"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#hasPosition -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/broadcasts/programmes#hasPosition">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#position"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Episode"/>
+                    <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Series"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
 
 
     <!-- 
@@ -125,98 +345,244 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
      -->
 
     
+
+
+    <!-- http://purl.org/NET/c4dm/event.owl#Event -->
+
+    <owl:Class rdf:about="http://purl.org/NET/c4dm/event.owl#Event"/>
     
 
 
-    <!-- http://graingert.co.uk/broadcast-ontology/Broadcast -->
+    <!-- http://purl.org/broadcasts/programmes#Actor -->
 
-    <owl:Class rdf:about="&bo;Broadcast">
-        <rdfs:subClassOf rdf:resource="&event;Event"/>
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Actor">
+        <rdfs:subClassOf rdf:resource="http://purl.org/vocab/participation/schema#Role"/>
     </owl:Class>
-    <owl:Class rdf:about="&bo;Channel"/>
+    
 
 
-    <!-- http://graingert.co.uk/broadcast-ontology/Broadcaster -->
+    <!-- http://purl.org/broadcasts/programmes#ActorDirector -->
 
-    <owl:Class rdf:about="&bo;Broadcaster">
-        <rdfs:subClassOf rdf:resource="&foaf;Organization"/>
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#ActorDirector">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Person"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://purl.org/vocab/participation/schema#holder_of"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#Actor"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://purl.org/vocab/participation/schema#holder_of"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#Director"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
     </owl:Class>
+    
 
-    <owl:Class rdf:about="&bo;Producer">
-        <rdfs:subClassOf rdf:resource="&part;Role"/>
+
+    <!-- http://purl.org/broadcasts/programmes#Broadcast -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Broadcast">
+        <rdfs:subClassOf rdf:resource="http://purl.org/NET/c4dm/event.owl#Event"/>
     </owl:Class>
+    
 
-    <owl:Class rdf:about="&bo;Production_Company">
-        <rdfs:subClassOf rdf:resource="&foaf;Organization"/>
+
+    <!-- http://purl.org/broadcasts/programmes#Broadcaster -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Broadcaster">
+        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Organization"/>
     </owl:Class>
+    
 
-    <!-- http://graingert.co.uk/broadcast-ontology/Programme -->
 
-    <owl:Class rdf:about="&bo;Programme"/>
-    <owl:Class rdf:about="&bo;Series"/>
-    <owl:Class rdf:about="&bo;Episode"/>
-    <owl:Class rdf:about="&bo;Format"/>
-    <owl:Class rdf:about="&bo;Genre"/>
+    <!-- http://purl.org/broadcasts/programmes#Cast -->
 
-    <owl:Class rdf:about="&bo;Version"/>
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Cast"/>
+    
 
-    <owl:Class rdf:about="&bo;Cast"/>
 
-    <owl:ObjectProperty rdf:about="&bo;hasCast">
-        <rdfs:domain rdf:resource="&bo;Programme"/>
-        <rdfs:range rdf:resource="&bo;Cast"/>
-        <rdfs:subPropertyOf rdf:resource="&foaf;maker"/>
-    </owl:ObjectProperty>
+    <!-- http://purl.org/broadcasts/programmes#Channel -->
 
-    <owl:ObjectProperty rdf:about="&bo;isCastOf">
-        <rdfs:inverseOf rdf:resource="&bo;hasCast"/>
-    </owl:ObjectProperty>
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Channel"/>
+    
 
-    <owl:ObjectProperty rdf:about="&bo;hasActor">
-        <rdfs:domain rdf:resource="&bo;Cast"/>
-        <rdfs:range rdf:resource="&bo;Actor"/>
-        <rdfs:subPropertyOf rdf:resource="&part;role"/>
-    </owl:ObjectProperty>
 
-    <owl:ObjectProperty rdf:about="&bo;actsAt">
-        <owl:inverseOf rdf:resource="&bo;hasActor"/>
-    </owl:ObjectProperty>
+    <!-- http://purl.org/broadcasts/programmes#CurrentAffairs -->
 
-    <owl:Class rdf:about="&bo;Actor">
-        <rdfs:subClassOf rdf:resource="&part;Role"/>
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#CurrentAffairs">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Programme"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasGenre"/>
+                        <owl:hasValue rdf:resource="http://purl.org/broadcasts/programmes#CurrentAffairsGenre"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
     </owl:Class>
+    
 
-    <owl:ObjectProperty rdf:about="&bo;hasPresenter">
-        <rdfs:domain rdf:resource="&bo;Cast"/>
-        <rdfs:range rdf:resource="&bo;Presenter"/>
-        <rdfs:subPropertyOf rdf:resource="&part;role"/>
-    </owl:ObjectProperty>
 
-    <owl:ObjectProperty rdf:about="&bo;presentsAt">
-        <owl:inverseOf rdf:resource="&bo;hasPresenter"/>
-    </owl:ObjectProperty>
+    <!-- http://purl.org/broadcasts/programmes#Director -->
 
-    <owl:Class rdf:about="&bo;Presenter">
-        <rdfs:subClassOf rdf:resource="&part;Role"/>
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Director">
+        <rdfs:subClassOf rdf:resource="http://purl.org/vocab/participation/schema#Role"/>
     </owl:Class>
+    
 
-    <owl:ObjectProperty rdf:about="&bo;hasDirector">
-        <rdfs:domain rdf:resource="&bo;Cast"/>
-        <rdfs:range rdf:resource="&bo;Director"/>
-        <rdfs:subPropertyOf rdf:resource="&part;role"/>
-    </owl:ObjectProperty>
 
-    <owl:ObjectProperty rdf:about="&bo;directsAt">
-        <owl:inverseOf rdf:resource="&bo;hasDirector"/>
-    </owl:ObjectProperty>
+    <!-- http://purl.org/broadcasts/programmes#Episode -->
 
-    <owl:Class rdf:about="&bo;Director">
-        <rdfs:subClassOf rdf:resource="&part;Role"/>
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Episode">
+        <rdfs:subClassOf rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
+        <owl:disjointWith rdf:resource="http://purl.org/broadcasts/programmes#Series"/>
+        <dc:comment>An episode is a Programme, that has a hasPosition in some Series. A key is defined such that any Episode with the same position and Series is the same Episode</dc:comment>
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#isEpisodeOf"/>
+            <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#hasPosition"/>
+        </owl:hasKey>
     </owl:Class>
+    
 
 
+    <!-- http://purl.org/broadcasts/programmes#Format -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Format"/>
+    
 
 
+    <!-- http://purl.org/broadcasts/programmes#Genre -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Genre"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#HDBroadcast -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#HDBroadcast">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Broadcast"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#isBroadcastOn"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#HDChannel"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#HDChannel -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#HDChannel">
+        <rdfs:subClassOf rdf:resource="http://purl.org/broadcasts/programmes#Channel"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#PanopticonBroadcast -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#PanopticonBroadcast">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Broadcast"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#isBroadcastOf"/>
+                        <owl:someValuesFrom>
+                            <owl:Class>
+                                <owl:intersectionOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Episode"/>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasProductionCompany"/>
+                                        <owl:hasValue rdf:resource="http://purl.org/broadcasts/programmes#Panopticon_Productions"/>
+                                    </owl:Restriction>
+                                </owl:intersectionOf>
+                            </owl:Class>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#Producer -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Producer">
+        <rdfs:subClassOf rdf:resource="http://purl.org/vocab/participation/schema#Role"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#ProductionCompany -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#ProductionCompany"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#Programme -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Programme"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#RepeatedEpisode -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#RepeatedEpisode">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Episode"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasBroadcast"/>
+                        <owl:onClass rdf:resource="http://purl.org/broadcasts/programmes#Broadcast"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#Series -->
+
+    <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Series">
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#hasEpisode"/>
+            <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#hasPosition"/>
+        </owl:hasKey>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/vocab/participation/schema#Role -->
+
+    <owl:Class rdf:about="http://purl.org/vocab/participation/schema#Role"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Organization -->
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Organization"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Person"/>
+    
 
 
     <!-- 
@@ -230,100 +596,172 @@ It defines concepts such as Series, Episodes and Broadcasts. Also defined are Ag
     
 
 
-    <!-- http://graingert.co.uk/broadcast-ontology/World_Around_Us -->
+    <!-- http://purl.org/broadcasts/programmes#CurrentAffairsGenre -->
 
-    <Programme rdf:about="&bo;World_Around_Us">
-        <dc:title xml:lang="en">The World Around Us</dc:title>
-        <hasVersion>
-            <Version>
-                <hasBroadcast>
-                    <Broadcast>
-                        <isBroadcastOn>
-                            <Channel rdf:about="http://www.bbc.co.uk/bbcone" />
-                        </isBroadcastOn>
-                    </Broadcast>
-                </hasBroadcast>
-            </Version>
-        </hasVersion>
-    </Programme>
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#CurrentAffairsGenre">
+        <rdf:type rdf:resource="http://purl.org/broadcasts/programmes#Genre"/>
+    </owl:NamedIndividual>
+    
 
-    <Broadcast>
-        <isBroadcastOf>
-            <Version>
-                <isVersionOf>
-                    <Programme>
-                        <hasGenre>
-                            <Genre>
-                                <rdfs:label xml:lang="en">News</rdfs:label>
-                            </Genre>
-                        </hasGenre>
-                    </Programme>
-                </isVersionOf>
-            </Version>
-        </isBroadcastOf>
+
+    <!-- http://purl.org/broadcasts/programmes#Panopticon_Productions -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#Panopticon_Productions"/>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#heroes_S01 -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#heroes_S01">
+        <rdf:type rdf:resource="http://purl.org/broadcasts/programmes#Series"/>
+        <hasPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</hasPosition>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#heroes_S01E02 -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#heroes_S01E02">
+        <rdf:type rdf:resource="http://purl.org/broadcasts/programmes#Episode"/>
+        <hasPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</hasPosition>
+        <isEpisodeOf rdf:resource="http://purl.org/broadcasts/programmes#heroes_S01"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#heroes_S01E02_other -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#heroes_S01E02_other">
+        <rdf:type rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
+        <hasPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</hasPosition>
+        <isEpisodeOf rdf:resource="http://purl.org/broadcasts/programmes#heroes_S01"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#testActorDirector -->
+
+    <foaf:Person rdf:about="http://purl.org/broadcasts/programmes#testActorDirector">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <part:holder_of>
+            <Director/>
+        </part:holder_of>
+        <part:holder_of>
+            <Actor/>
+        </part:holder_of>
+    </foaf:Person>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#testCurrentAffairs -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#testCurrentAffairs">
+        <rdf:type rdf:resource="http://purl.org/broadcasts/programmes#Episode"/>
+        <hasGenre rdf:resource="http://purl.org/broadcasts/programmes#CurrentAffairsGenre"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#testPanopticonBroadcast -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#testPanopticonBroadcast">
+        <rdf:type rdf:resource="http://purl.org/broadcasts/programmes#Broadcast"/>
+        <isBroadcastOf rdf:resource="http://purl.org/broadcasts/programmes#testPanopticonBroadcastEpisode"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#testPanopticonBroadcastEpisode -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#testPanopticonBroadcastEpisode">
+        <dc:comment>Individual to demonstrate PanopticonBroadcast</dc:comment>
+        <hasProductionCompany rdf:resource="http://purl.org/broadcasts/programmes#Panopticon_Productions"/>
+        <isEpisodeOf rdf:resource="http://purl.org/broadcasts/programmes#heroes_S01"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#testPanopticonBroadcastProgramme -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#testPanopticonBroadcastProgramme">
+        <dc:comment>Individual to show that unless it&#39;s an Episode it&#39;s not a PanopticonBroadcast</dc:comment>
+        <hasProductionCompany rdf:resource="http://purl.org/broadcasts/programmes#Panopticon_Productions"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#testRepeatedEpisode -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#testRepeatedEpisode">
+        <rdf:type rdf:resource="http://purl.org/broadcasts/programmes#Episode"/>
+        <hasBroadcast>
+            <Broadcast/>
+        </hasBroadcast>
+        <hasBroadcast>
+            <Broadcast/>
+        </hasBroadcast>
+    </owl:NamedIndividual>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <Broadcast/>
+            <Broadcast/>
+        </owl:distinctMembers>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <Broadcast/>
+            <Broadcast/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#theWorldAroundUs -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#theWorldAroundUs">
+        <rdf:type rdf:resource="http://purl.org/broadcasts/programmes#Episode"/>
+        <hasBroadcast rdf:resource="http://purl.org/broadcasts/programmes#theWorldAroundUsBroadcast"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#theWorldAroundUsBroadcast -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/broadcasts/programmes#theWorldAroundUsBroadcast">
+        <rdf:type rdf:resource="http://purl.org/broadcasts/programmes#Broadcast"/>
+        <dc:comment>This is an example of an HDBroadcast</dc:comment>
         <isBroadcastOn>
-            <Channel>
-                <rdfs:label xml:lang="en">Channel 9</rdfs:label>
-            </Channel>
+            <HDChannel/>
         </isBroadcastOn>
-        <event:time>
-            <tl:UTInterval>
-                <tl:start rdf:datatype="&xsd;dateTime">2007-10-15T12:00:00</tl:start>
-            </tl:UTInterval>
-        </event:time>
-    </Broadcast>
+    </owl:NamedIndividual>
+    <Cast>
+        <hasActor>
+            <Actor/>
+        </hasActor>
+        <hasDirector>
+            <Director/>
+        </hasDirector>
+    </Cast>
+    
 
-    <Broadcast>
-        <isBroadcastOf>
-            <Version>  
-                <isVersionOf>
-                    <Programme>
-                        <hasFormat>
-                            <Format>
-                                <rdfs:label xml:lang="en">Readings</rdfs:label>
-                            </Format>
-                        </hasFormat>
-                        <hasGenre>
-                            <Genre>
-                                <rdfs:label xml:lang="en">Pre-School</rdfs:label>
-                            </Genre>
-                        </hasGenre>
-                        <hasCast>
-                            <Cast>
-                                <hasActor>
-                                    <Actor>
-                                        <part:holder>
-                                            <foaf:Person>
-                                                <foaf:name>Dirk Cleftjaw</foaf:name>
-                                            </foaf:Person>
-                                        </part:holder>
-                                    </Actor>
-                                </hasActor>
-                            </Cast>
-                        </hasCast>
-                    </Programme>
-                </isVersionOf>
-            </Version>
-        </isBroadcastOf>
-        <event:time>
-            <tl:UTInterval>
-                <tl:duration rdf:datatype="&xsd;duration">PTH1M30</tl:duration>
-            </tl:UTInterval>
-        </event:time>
-        <isBroadcastOn>
-            <Channel>
-                <rdfs:label xml:lang="en">CBTV</rdfs:label>
-                <isOperatedBy>
-                    <Broadcaster>
-                        <rdfs:label xml:lang="en">BTV</rdfs:label>
-                    </Broadcaster>
-                </isOperatedBy>
-            </Channel>
-        </isBroadcastOn>
-    </Broadcast>
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <Broadcast/>
+            <Broadcast/>
+        </owl:distinctMembers>
+    </rdf:Description>
 </rdf:RDF>
 
 
 
-<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+<!-- Generated by the OWL API (version 3.2.1.1753) http://owlapi.sourceforge.net -->
 

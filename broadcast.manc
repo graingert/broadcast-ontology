@@ -85,10 +85,12 @@ Class: ProductionCompany
 
 ObjectProperty: hasProductionCompany
     SubPropertyOf: foaf:maker
+    Domain: Programme
+    Range: ProductionCompany
 ObjectProperty: isProductionCompanyOf
     SubPropertyOf: foaf:made
-    Range: Programme
     Domain: ProductionCompany
+    Range: Programme
     InverseOf: hasProductionCompany
 
 Class: event:Event
@@ -168,9 +170,14 @@ Class: PanopticonBroadcast
 
 Individual: testPanopticonBroadcast
     Types: Broadcast
-    Facts: isBroadcastOf _:testEpisode
+    Facts: isBroadcastOf testPanopticonBroadcastEpisode
 
-Individual: _:testEpisode
+Individual: testPanopticonBroadcastEpisode
+    Annotations: dc:comment "Individual to demonstrate PanopticonBroadcast"
+    Facts: hasProductionCompany Panopticon_Productions, isEpisodeOf heroes_S01
+
+Individual: testPanopticonBroadcastProgramme
+    Annotations: dc:comment "Individual to show that unless it's an Episode it's not a PanopticonBroadcast"
     Facts: hasProductionCompany Panopticon_Productions
 
 Class: CurrentAffairs

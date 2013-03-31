@@ -20,7 +20,6 @@ Import: <http://purl.org/NET/c4dm/event.owl#>
 Import: <http://purl.org/NET/c4dm/timeline.owl#>
 
 Class: Channel
-Class: Production_Company
 Class: Programme
 
 ObjectProperty: hasEpisode
@@ -82,6 +81,7 @@ ObjectProperty: foaf:made
 Class: ProductionCompany
 
 ObjectProperty: hasProductionCompany
+    SubPropertyOf: foaf:maker
 ObjectProperty: isProductionCompanyOf
     SubPropertyOf: foaf:made
     Range: Programme
@@ -150,13 +150,17 @@ ObjectProperty: hasDirector
 
 Individual: Panopticon_Productions
 Individual: CurrentAffairsGenre
+    Types: Genre
+
 ObjectProperty: part:holder_of
+    InverseOf: part:holder
+ObjectProperty: part:holder
 Class: foaf:Person
 
 Class: PanopticonBroadcast
-    SubClassOf: Broadcast,
+    EquivalentTo: Broadcast and
         isBroadcastOf some (
-            Episode that foaf:maker value Panopticon_Productions
+            Episode that hasProductionCompany value Panopticon_Productions
         )
 
 Individual: testPanopticonBroadcast
@@ -167,20 +171,53 @@ Individual: _:testEpisode
     Facts: hasProductionCompany Panopticon_Productions
 
 Class: CurrentAffairs
-    SubClassOf: Programme,
-        hasGenre value CurrentAffairsGenre
+    EquivalentTo: Programme and hasGenre value CurrentAffairsGenre
+
+Individual: testCurrentAffairs
+    Types: Episode
+    Facts: hasGenre CurrentAffairsGenre
 
 Class: HDChannel
     SubClassOf: Channel
 
 Class: HDBroadcast
-    SubClassOf: Broadcast,
-        isBroadcastOn some HDChannel
+    EquivalentTo: Broadcast and isBroadcastOn some HDChannel
+
+Individual: testHDBroadcast
+    Types: Broadcast
+    Facts: isBroadcastOn _:testChannel
+
+Individual: _:testChannel
+    Types: HDChannel
 
 Class: RepeatedEpisode
-    SubClassOf: Episode,
-        hasBroadcast min 2 Broadcast
+    EquivalentTo: Episode and hasBroadcast min 2 Broadcast
+
+Individual: testRepeatedEpisode
+    Types: Episode
+    Facts: hasBroadcast _:broadcastOne, hasBroadcast _:broadcastTwo
+
+Individual: _:broadcastOne
+    Types: Broadcast
+    DifferentFrom: _:broadcastTwo
+
+Individual: _:broadcastTwo
+    Types: Broadcast
+    DifferentFrom: _:broadcastOne
 
 Class: ActorDirector
-    SubClassOf: foaf:Person,
-        part:holder_of some Actor and part:holder_of some Director
+    EquivalentTo: foaf:Person and part:holder_of some Actor and part:holder_of some Director
+
+Individual: testActorDirector
+    Types: foaf:Person
+    Facts: part:holder_of _:actor, part:holder_of _:director
+
+Individual: _:castOfHeroesS02E03
+    Types: Cast
+    Facts: hasActor _:actor, hasDirector _:director
+
+Individual: _:actor
+    Types: Actor
+
+Individual: _:director
+    Types: Director

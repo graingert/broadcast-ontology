@@ -157,6 +157,18 @@
     
 
 
+    <!-- http://purl.org/NET/c4dm/event.owl#agent -->
+
+    <owl:ObjectProperty rdf:about="&event;agent"/>
+    
+
+
+    <!-- http://purl.org/NET/c4dm/event.owl#agent_of -->
+
+    <owl:ObjectProperty rdf:about="&event;agent_of"/>
+    
+
+
     <!-- http://purl.org/NET/c4dm/event.owl#factor -->
 
     <owl:ObjectProperty rdf:about="&event;factor"/>
@@ -215,8 +227,9 @@
     <!-- http://purl.org/broadcasts/programmes#hasBroadcaster -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasBroadcaster">
+        <rdfs:subPropertyOf rdf:resource="&event;agent"/>
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Broadcast"/>
         <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Broadcaster"/>
-        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Channel"/>
         <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#isBroadcasterOf"/>
     </owl:ObjectProperty>
     
@@ -346,8 +359,9 @@
     <!-- http://purl.org/broadcasts/programmes#isBroadcasterOf -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isBroadcasterOf">
+        <rdfs:subPropertyOf rdf:resource="&event;agent_of"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Broadcast"/>
         <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Broadcaster"/>
-        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Channel"/>
     </owl:ObjectProperty>
     
 
@@ -629,14 +643,37 @@
     <!-- http://purl.org/broadcasts/programmes#Episode -->
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Episode">
-        <rdfs:subClassOf rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Programme"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#isEpisodeOf"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#Series"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Programme"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasPosition"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#position"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://purl.org/broadcasts/programmes#Series"/>
         <dc:description xml:lang="en">A separate program that is part of a television or radio series.</dc:description>
         <rdfs:comment xml:lang="en">An episode is a Programme, that has a hasPosition in some Series.
 
 This allows one off Programme instances that are not part of a Series to be defined.
 
-A key is defined such that any Episode with the same position and Series is the same Episode.</rdfs:comment>
+A key is defined such that any Episode with the same position and Series is the same Episode.
+
+Also to be an episode, the episode must be an EpisodeOf some Series and have a position</rdfs:comment>
         <owl:hasKey rdf:parseType="Collection">
             <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#isEpisodeOf"/>
             <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#hasPosition"/>

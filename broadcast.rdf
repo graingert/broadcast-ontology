@@ -127,6 +127,21 @@
             </rdfs:Datatype>
         </owl:equivalentClass>
     </rdfs:Datatype>
+    <owl:Axiom>
+        <rdfs:comment xml:lang="en">Could also have been an xsd:positveInteger</rdfs:comment>
+        <owl:annotatedSource rdf:resource="http://purl.org/broadcasts/programmes#position"/>
+        <owl:annotatedProperty rdf:resource="&owl;equivalentClass"/>
+        <owl:annotatedTarget>
+            <rdfs:Datatype>
+                <owl:onDatatype rdf:resource="&xsd;integer"/>
+                <owl:withRestrictions rdf:parseType="Collection">
+                    <rdf:Description>
+                        <xsd:minInclusive rdf:datatype="&xsd;integer">1</xsd:minInclusive>
+                    </rdf:Description>
+                </owl:withRestrictions>
+            </rdfs:Datatype>
+        </owl:annotatedTarget>
+    </owl:Axiom>
     
 
 
@@ -317,6 +332,7 @@
     <!-- http://purl.org/broadcasts/programmes#isBroadcastOn -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isBroadcastOn">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
         <rdfs:comment xml:lang="en">Relates a Broadcast to the Channel that it is Broadcast on</rdfs:comment>
         <rdfs:subPropertyOf rdf:resource="&event;factor"/>
         <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Broadcast"/>

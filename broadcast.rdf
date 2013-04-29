@@ -184,6 +184,7 @@
 
     <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasBroadcast">
         <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:comment xml:lang="en">relates one Programme to some Broadcast event</rdfs:comment>
         <rdfs:subPropertyOf rdf:resource="&event;factor_of"/>
         <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Broadcast"/>
         <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
@@ -205,10 +206,21 @@
 
     <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasCast">
         <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">relates a Programme to the single Cast that made it</rdfs:comment>
         <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Cast"/>
         <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
         <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#isCastOf"/>
         <rdfs:subPropertyOf rdf:resource="&foaf;maker"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#hasChannel -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasChannel">
+        <rdfs:comment xml:lang="en">Is equivalent to isBroadcastOn to fit with the naming convention.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&event;factor"/>
+        <owl:equivalentProperty rdf:resource="http://purl.org/broadcasts/programmes#isBroadcastOn"/>
     </owl:ObjectProperty>
     
 
@@ -236,7 +248,7 @@
 
     <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasFormat">
         <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Format"/>
-        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Genre"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
         <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#isFormatOf"/>
     </owl:ObjectProperty>
     
@@ -275,6 +287,7 @@
     <!-- http://purl.org/broadcasts/programmes#hasProductionCompany -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#hasProductionCompany">
+        <rdfs:comment xml:lang="en">relates the ProductionCompany that made the</rdfs:comment>
         <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#ProductionCompany"/>
         <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
         <rdfs:subPropertyOf rdf:resource="&foaf;maker"/>
@@ -285,6 +298,11 @@
     <!-- http://purl.org/broadcasts/programmes#isBroadcastOf -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isBroadcastOf">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">relates some Broadcast to a Programme</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&event;factor"/>
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Broadcast"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
         <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#hasBroadcast"/>
     </owl:ObjectProperty>
     
@@ -293,25 +311,40 @@
     <!-- http://purl.org/broadcasts/programmes#isBroadcastOn -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isBroadcastOn">
+        <rdfs:comment xml:lang="en">Relates a Broadcast to the Channel that it is Broadcast on</rdfs:comment>
         <rdfs:subPropertyOf rdf:resource="&event;factor"/>
         <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Broadcast"/>
         <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Channel"/>
+        <owl:inverseOf rdf:resource="http://purl.org/broadcasts/programmes#isChannelOf"/>
     </owl:ObjectProperty>
     
 
 
     <!-- http://purl.org/broadcasts/programmes#isBroadcasterOf -->
 
-    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isBroadcasterOf"/>
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isBroadcasterOf">
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Broadcaster"/>
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Channel"/>
+    </owl:ObjectProperty>
     
 
 
     <!-- http://purl.org/broadcasts/programmes#isCastOf -->
 
     <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isCastOf">
+        <rdf:type rdf:resource="&owl;InverseFunctionalProperty"/>
+        <rdfs:comment xml:lang="en">relates a single Cast to a Programme that the cast made</rdfs:comment>
         <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Cast"/>
         <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
         <rdfs:subPropertyOf rdf:resource="&foaf;made"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/broadcasts/programmes#isChannelOf -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isChannelOf">
+        <rdfs:subPropertyOf rdf:resource="&event;factor_of"/>
     </owl:ObjectProperty>
     
 
@@ -328,7 +361,10 @@
 
     <!-- http://purl.org/broadcasts/programmes#isFormatOf -->
 
-    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isFormatOf"/>
+    <owl:ObjectProperty rdf:about="http://purl.org/broadcasts/programmes#isFormatOf">
+        <rdfs:range rdf:resource="http://purl.org/broadcasts/programmes#Format"/>
+        <rdfs:domain rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
+    </owl:ObjectProperty>
     
 
 

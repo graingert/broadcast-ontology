@@ -15,7 +15,7 @@ Ontology: <http://purl.org/broadcasts/programmes#>
 
 Import: <http://xmlns.com/foaf/0.1/>
 Import: <http://purl.org/dc/elements/1.1/>
-Import: <http://purl.org/vocab/participation/schema#>
+Import: <https://raw.github.com/graingert/participation-schema/865febf4a8820ecd487340b07134be52c3f8f614/participation.rdf>
 Import: <http://purl.org/NET/c4dm/event.owl#>
 Import: <http://purl.org/NET/c4dm/timeline.owl#>
 
@@ -217,15 +217,14 @@ Class: RepeatedEpisode
 
 Individual: testRepeatedEpisode
     Types: Episode
-    Facts: hasBroadcast _:broadcastOne, hasBroadcast _:broadcastTwo
+    Facts: hasBroadcast testBroadcastOne, hasBroadcast testBroadcastTwo
 
-Individual: _:broadcastOne
+Individual: testBroadcastOne
     Types: Broadcast
-    DifferentFrom: _:broadcastTwo
+    DifferentFrom: testBroadcastTwo
 
-Individual: _:broadcastTwo
+Individual: testBroadcastTwo
     Types: Broadcast
-    DifferentFrom: _:broadcastOne
 
 Class: ActorDirector
     EquivalentTo: foaf:Person and part:holder_of some Actor and part:holder_of some Director

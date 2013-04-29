@@ -458,6 +458,7 @@
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Actor">
         <rdfs:subClassOf rdf:resource="http://purl.org/broadcasts/programmes#RoleOnCast"/>
+        <dc:description xml:lang="en">The Role of a person who acts in a dramatic or comic production and works in film, television, theatre, or radio in that capacity.</dc:description>
     </owl:Class>
     
 
@@ -490,6 +491,7 @@
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Broadcast">
         <rdfs:subClassOf rdf:resource="&event;Event"/>
         <rdfs:comment xml:lang="en">Broadcast subclasses event so as to have a time and factors that are some Broacasters and a Programme.</rdfs:comment>
+        <dc:description xml:lang="en">Event that describes the transmition of a programme for public or general use.</dc:description>
     </owl:Class>
     
 
@@ -498,6 +500,7 @@
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Broadcaster">
         <rdfs:subClassOf rdf:resource="&foaf;Organization"/>
+        <dc:description xml:lang="en">The Organization that handles the Broadcast of a Programme</dc:description>
     </owl:Class>
     
 
@@ -513,7 +516,8 @@
                 </owl:unionOf>
             </owl:Class>
         </rdfs:subClassOf>
-        <dc:description xml:lang="en">The Organisation or Group that made a Programme</dc:description>
+        <rdfs:comment xml:lang="en">A Cast is used because the Role ontology requires an Organization or Group and Programme is Disjoint with foaf:Agent.</rdfs:comment>
+        <dc:description xml:lang="en">The Organisation or Group that made a Programme.</dc:description>
     </owl:Class>
     
 
@@ -523,6 +527,7 @@
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Channel">
         <rdfs:subClassOf rdf:resource="&event;Factor"/>
         <rdfs:comment xml:lang="en">A Channel is the Factor that an Episode is Broadcast on</rdfs:comment>
+        <dc:description xml:lang="en">A specified band for the transmission and reception of electromagnetic signals, as for television signals.</dc:description>
     </owl:Class>
     
 
@@ -550,6 +555,7 @@
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Director">
         <rdfs:subClassOf rdf:resource="http://purl.org/broadcasts/programmes#RoleOnCast"/>
+        <dc:description xml:lang="en">The Role of a person who directs the making of a Programme. Generally, the role consists of controling a film&apos;s artistic and dramatic aspects, and visualizing the script.</dc:description>
     </owl:Class>
     
 
@@ -559,6 +565,7 @@
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Episode">
         <rdfs:subClassOf rdf:resource="http://purl.org/broadcasts/programmes#Programme"/>
         <owl:disjointWith rdf:resource="http://purl.org/broadcasts/programmes#Series"/>
+        <dc:description xml:lang="en">A separate program that is part of a television or radio series.</dc:description>
         <rdfs:comment xml:lang="en">An episode is a Programme, that has a hasPosition in some Series.
 
 This allows one off Programme instances that are not part of a Series to be defined.
@@ -575,7 +582,8 @@ A key is defined such that any Episode with the same position and Series is the 
     <!-- http://purl.org/broadcasts/programmes#Format -->
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Format">
-        <dc:description xml:lang="en">Instances of this concept include documentaries, talk shows, animation, etc.</dc:description>
+        <dc:description xml:lang="en">A format describes the overall concept, premise and branding of a television program.</dc:description>
+        <rdfs:comment xml:lang="en">Instances of this concept could include documentaries, talk shows, animation, etc.</rdfs:comment>
     </owl:Class>
     
 
@@ -583,7 +591,8 @@ A key is defined such that any Episode with the same position and Series is the 
     <!-- http://purl.org/broadcasts/programmes#Genre -->
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Genre">
-        <dc:description xml:lang="en">Root Genre for subclasses such as Sci-Fi.</dc:description>
+        <dc:description xml:lang="en">A category of artistic composition, as in music or literature, marked by a distinctive style, form, or content</dc:description>
+        <rdfs:comment xml:lang="en">Root Genre for subclasses such as Sci-Fi.</rdfs:comment>
     </owl:Class>
     
 
@@ -602,6 +611,7 @@ A key is defined such that any Episode with the same position and Series is the 
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <dc:description xml:lang="en">A high definition broadcast.</dc:description>
     </owl:Class>
     
 
@@ -610,7 +620,7 @@ A key is defined such that any Episode with the same position and Series is the 
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#HDChannel">
         <rdfs:subClassOf rdf:resource="http://purl.org/broadcasts/programmes#Channel"/>
-        <rdfs:comment xml:lang="en">A Channel that supports HD programming</rdfs:comment>
+        <dc:description xml:lang="en">A Channel that supports HD programming</dc:description>
     </owl:Class>
     
 
@@ -639,6 +649,7 @@ A key is defined such that any Episode with the same position and Series is the 
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <dc:description xml:lang="en">A broadcast of an episode made by Panopticon Productions.</dc:description>
     </owl:Class>
     
 
@@ -647,6 +658,7 @@ A key is defined such that any Episode with the same position and Series is the 
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Presenter">
         <rdfs:subClassOf rdf:resource="http://purl.org/broadcasts/programmes#RoleOnCast"/>
+        <dc:description xml:lang="en">The Role of a person who introduces or hosts television programmes.</dc:description>
     </owl:Class>
     
 
@@ -655,6 +667,7 @@ A key is defined such that any Episode with the same position and Series is the 
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Producer">
         <rdfs:subClassOf rdf:resource="http://purl.org/broadcasts/programmes#RoleOnCast"/>
+        <dc:description xml:lang="en">The role of a person that prepares and supervises the making of a program before presenting the product to a financing entity or a distributor.</dc:description>
     </owl:Class>
     
 
@@ -663,6 +676,7 @@ A key is defined such that any Episode with the same position and Series is the 
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#ProductionCompany">
         <rdfs:subClassOf rdf:resource="&foaf;Organization"/>
+        <dc:description xml:lang="en">The Organization that handles the production of a Programme</dc:description>
     </owl:Class>
     
 
@@ -713,6 +727,7 @@ This way the Role can remain the same and held by different people over time.</r
         <rdfs:comment xml:lang="en">Allows Episodes to be grouped into a Series.
 
 A key is defined such that any Series that share any Episodes and have the same hasPosition are the same Series.</rdfs:comment>
+        <dc:description xml:lang="en">An ordered set of related programmes</dc:description>
         <owl:hasKey rdf:parseType="Collection">
             <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#hasEpisode"/>
             <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#hasPosition"/>

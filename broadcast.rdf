@@ -126,6 +126,7 @@
                 </owl:withRestrictions>
             </rdfs:Datatype>
         </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">Represents the position of an instance in an ordered set of instances</rdfs:comment>
     </rdfs:Datatype>
     <owl:Axiom>
         <rdfs:comment xml:lang="en">Could also have been an xsd:positveInteger</rdfs:comment>
@@ -789,6 +790,28 @@ This way the Role can remain the same and held by different people over time.</r
     <!-- http://purl.org/broadcasts/programmes#Series -->
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Series">
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&owl;Thing"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasPosition"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#position"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&owl;Thing"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasEpisode"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#Episode"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">Allows Episodes to be grouped into a Series.
 
 A key is defined such that any Series that share any Episodes and have the same hasPosition are the same Series.</rdfs:comment>

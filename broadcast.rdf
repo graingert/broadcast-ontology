@@ -11,39 +11,25 @@
     <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
     <!ENTITY event "http://purl.org/NET/c4dm/event.owl#" >
-    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
     <!ENTITY skos "http://www.w3.org/2004/02/skos/core#" >
-    <!ENTITY agrovoc "http://www.fao.org/aims/aos/agrovoc/" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY tl "http://purl.org/NET/c4dm/timeline.owl#" >
     <!ENTITY part "http://purl.org/vocab/participation/schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
-    <!ENTITY OntoPneumo "http://doe-generated-ontology.com/OntoPneumo#" >
-    <!ENTITY generations "http://www.owl-ontologies.com/generations.owl#" >
-    <!ENTITY carOntology "http://users.jyu.fi/~artkache/carOntology.owl#" >
-    <!ENTITY pizza "http://www.co-ode.org/ontologies/pizza/pizza.owl#" >
-    <!ENTITY DosageDuFacteurVII "http://doe-generated-ontology.com/OntoPneumo#DosageDuFacteurVII+" >
 ]>
 
 
 <rdf:RDF xmlns="http://purl.org/broadcasts/programmes#"
      xml:base="http://purl.org/broadcasts/programmes"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:carOntology="http://users.jyu.fi/~artkache/carOntology.owl#"
      xmlns:tl="http://purl.org/NET/c4dm/timeline.owl#"
-     xmlns:DosageDuFacteurVII="&OntoPneumo;DosageDuFacteurVII+"
      xmlns:foaf="http://xmlns.com/foaf/0.1/"
      xmlns:DOE="http://cwi.nl/~troncy/DOE#"
      xmlns:vann="http://purl.org/vocab/vann/"
-     xmlns:OntoPneumo="http://doe-generated-ontology.com/OntoPneumo#"
-     xmlns:agrovoc="http://www.fao.org/aims/aos/agrovoc/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
      xmlns:dctype="http://purl.org/dc/dcmitype/"
-     xmlns:generations="http://www.owl-ontologies.com/generations.owl#"
-     xmlns:event="http://purl.org/NET/c4dm/event.owl#"
      xmlns:dct="http://purl.org/dc/terms/"
-     xmlns:pizza="http://www.co-ode.org/ontologies/pizza/pizza.owl#"
+     xmlns:event="http://purl.org/NET/c4dm/event.owl#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -666,8 +652,8 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Programme"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasPosition"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#position"/>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#isEpisodeOf"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#Series"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -677,8 +663,8 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Programme"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#isEpisodeOf"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#Series"/>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasPosition"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#position"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -850,8 +836,8 @@ This way the Role can remain the same and held by different people over time.</r
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="&owl;Thing"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasPosition"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#position"/>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasEpisode"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#Episode"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -861,8 +847,8 @@ This way the Role can remain the same and held by different people over time.</r
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="&owl;Thing"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasEpisode"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#Episode"/>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasPosition"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#position"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -1121,6 +1107,13 @@ A key is defined such that any Series that share any Episodes and have the same 
      -->
 
     <rdf:Description>
+        <rdf:type rdf:resource="&owl;AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#testBroadcastOne"/>
+            <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#testBroadcastTwo"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
         <rdf:type rdf:resource="&owl;AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
             <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Broadcast"/>
@@ -1130,13 +1123,6 @@ A key is defined such that any Series that share any Episodes and have the same 
             <rdf:Description rdf:about="&part;Role"/>
             <rdf:Description rdf:about="&foaf;Agent"/>
         </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="&owl;AllDifferent"/>
-        <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#testBroadcastOne"/>
-            <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#testBroadcastTwo"/>
-        </owl:distinctMembers>
     </rdf:Description>
 </rdf:RDF>
 

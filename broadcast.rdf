@@ -51,8 +51,8 @@
      xmlns:skos="http://www.w3.org/2004/02/skos/core#">
     <owl:Ontology rdf:about="http://purl.org/broadcasts/programmes#">
         <vann:preferredNamespacePrefix>bo</vann:preferredNamespacePrefix>
-        <dc:description xml:lang="en">An Ontology for describing the various relations and classes envolved in Broadcastable Media</dc:description>
         <vann:preferredNamespaceUri>http://purl.org/broadcasts/programmes#</vann:preferredNamespaceUri>
+        <dc:description xml:lang="en">An Ontology for describing the various relations and classes involved in Broadcastable Media</dc:description>
         <dc:title xml:lang="en">Broadcast Ontology</dc:title>
         <dc:creator xml:lang="en">Thomas Grainger</dc:creator>
         <rdfs:comment xml:lang="en">see http://graingert.co.uk/broadcast-ontology/broadcast.rdf for my email</rdfs:comment>
@@ -555,7 +555,7 @@
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Actor">
         <rdfs:subClassOf rdf:resource="http://purl.org/broadcasts/programmes#RoleOnCast"/>
-        <dc:description xml:lang="en">The Role of a person who acts in a dramatic or comic production and works in film, television, theatre, or radio in that capacity.</dc:description>
+        <dc:description xml:lang="en">The Role of a person who acts in a dramatic or comic production and works in film, television, theater, or radio in that capacity.</dc:description>
     </owl:Class>
     
 
@@ -587,8 +587,8 @@
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Broadcast">
         <rdfs:subClassOf rdf:resource="&event;Event"/>
-        <rdfs:comment xml:lang="en">Broadcast subclasses event so as to have a time and factors that are some Broacasters and a Programme.</rdfs:comment>
-        <dc:description xml:lang="en">Event that describes the transmition of a programme for public or general use.</dc:description>
+        <rdfs:comment xml:lang="en">Broadcast subclasses event so as to have a time and factors that are some Broadcasters and a Programme.</rdfs:comment>
+        <dc:description xml:lang="en">Event that describes the transmission of a programme for public or general use.</dc:description>
     </owl:Class>
     
 
@@ -665,8 +665,8 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Programme"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#isEpisodeOf"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#Series"/>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasPosition"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#position"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -676,8 +676,8 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://purl.org/broadcasts/programmes#Programme"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#hasPosition"/>
-                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#position"/>
+                        <owl:onProperty rdf:resource="http://purl.org/broadcasts/programmes#isEpisodeOf"/>
+                        <owl:someValuesFrom rdf:resource="http://purl.org/broadcasts/programmes#Series"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -805,7 +805,7 @@ Also to be an episode, the episode must be an EpisodeOf some Series and have a p
 
     <owl:Class rdf:about="http://purl.org/broadcasts/programmes#Programme">
         <rdfs:subClassOf rdf:resource="&event;Factor"/>
-        <rdfs:comment xml:lang="en">Programme is some peice of broadcastable media.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Programme is some piece of broadcastable media.</rdfs:comment>
     </owl:Class>
     
 
